@@ -74,7 +74,7 @@ public class PictureControllerIntegrationTest {
 
 	private String TOKEN = null;
 	private String ADMIN_TOKEN = null;
-	private final List<String> categories = Arrays.asList("living things", "machine", "nature");
+	private final List<String> categories = Arrays.asList("living thing", "machine", "nature");
 	private final String IMAGE_PATH = "src/main/resources/static/1.png";
 	private final String EMAIL = "devmohamed990@gmail.com";
 	private final String ADDRESS = "cairo-egypt";
@@ -176,7 +176,7 @@ public class PictureControllerIntegrationTest {
 				mockMvc.perform(get("/pic/image").queryParams(params).contentType(MediaType.APPLICATION_JSON_VALUE)
 						.header("Authorization", "Bearer " + ADMIN_TOKEN.trim())).andExpect(status().isOk())
 						.andExpect(jsonPath("$.code", is(Integer.parseInt(pictureDTO.getId().toString()))))
-						.andExpect(jsonPath("$.name", notNullValue())).andExpect(jsonPath("$.url", notNullValue()))
+						.andExpect(jsonPath("$.name", notNullValue()))
 						.andExpect(jsonPath("$.description", notNullValue()))
 						.andExpect(jsonPath("$.category", is(categories.get(0))))
 						.andExpect(jsonPath("$.width", notNullValue())).andExpect(jsonPath("$.height", notNullValue()));
