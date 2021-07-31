@@ -17,5 +17,5 @@ public interface PictureDAO extends JpaRepository<Picture, Long> {
 	@Transactional
 	public void deleteByUserEmail(String email);
 	
-	public Picture findByPictureCode(String pictureCode);
+	public Picture findByPictureCode(String pictureCode);	
 }

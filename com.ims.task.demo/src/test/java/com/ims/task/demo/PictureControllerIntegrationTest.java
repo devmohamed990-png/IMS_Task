@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -81,7 +82,7 @@ public class PictureControllerIntegrationTest {
 	private final String PASSWORD = "ASD@123";
 	private final String ADMIN_EMAIL = "admin";
 	private final String ADMIN_PASSWORD = "admin123";
-	private final String IMAGE_PATH_AFTER_MOVING = "storage/attachment";
+	private final String IMAGE_FOLDER_PATH = "storage/";
 	private PictureDTO pictureDTO;
 
 	@BeforeAll
@@ -233,8 +234,8 @@ public class PictureControllerIntegrationTest {
 
 	@AfterAll
 	public void deleteUserFromDatabase() {
-
-		FileUtils.deleteFile(IMAGE_PATH_AFTER_MOVING);
+				
+		FileUtils.deleteFolder(new File(IMAGE_FOLDER_PATH + pictureDAO.findById(pictureDTO.getId()).get().getPictureCode() + "/"));
 		pictureDAO.deleteByUserEmail(EMAIL);
 		userDAO.delete(userDAO.findByEmail(EMAIL));
 	}
